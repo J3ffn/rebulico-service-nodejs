@@ -1,12 +1,12 @@
 import { Router } from "express";
-import postRouter from "./post.routes";
+import postRouter from "./api/post.routes";
 
-const routesMapped = Router();
+const routes = Router();
 
-routesMapped.use("/post", postRouter);
+routes.use("/post", postRouter);
 
-routesMapped.get("/health", (req: any, res: any) => {
+routes.get("/health", (req: any, res: any) => {
   return res.send({ status: "Up" });
 });
 
-export default routesMapped;
+export default routes;

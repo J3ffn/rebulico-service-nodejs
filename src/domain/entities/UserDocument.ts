@@ -1,7 +1,13 @@
-import { Document } from "mongoose";
+export default class UserDocument {
+  username: string;
+  email: string;
+  password: string;
+  roles: string[];
 
-export interface UserDocument extends Document {
-  id: String;
-  email: String;
-  name: String;
+  constructor(username: string, email: string, password: string, roles: string[] = ['user']) {
+    this.username = username;
+    this.email = email;
+    this.password = password;
+    this.roles = roles;
+  }
 }

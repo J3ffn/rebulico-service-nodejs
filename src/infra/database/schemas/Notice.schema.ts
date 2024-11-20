@@ -1,30 +1,23 @@
 import mongoose, { Schema } from "mongoose";
 import { NoticeDocument } from "../../../domain/entities/NoticeDocument";
-import { UserTraceSchema } from "./UserTrace.schema";
 
-const noticeSchema: Schema = new Schema(
+const tagSchema = new Schema(
   {
-    attributes: {
-      type: {
-        src: String,
-        alt: String,
-      },
-      require: true,
-    },
-    text: {
+    name: {
       type: String,
-      require: true,
+      required: true,
     },
-    tags: [{ type: String, required: true }],
-    created_by: UserTraceSchema,
-    updated_by: UserTraceSchema,
+    slug: {
+      type: String,
+      required: true,
+    },
   },
   {
-    timestamps: true, // Já cria o updated_at e created_at
+    timestamps: true,
     versionKey: false,
   }
 );
 
-const NoticeModel = mongoose.model<NoticeDocument>("Notice", noticeSchema);
+const TagModel = mongoose.model<NoticeDocument>("Tag", tagSchema);
 
-export { NoticeModel, noticeSchema };
+export { TagModel, tagSchema };

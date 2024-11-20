@@ -1,5 +1,5 @@
-import { PostDocument } from "../../../domain/entities/PostDocument";
-import PostService from "../../../domain/services/PostService";
+import PostDocument from "../../../domain/entities/PostDocument";
+import PostService from "../../../domain/services/Post.service";
 
 export class FindPostByIdUseCase {
   constructor(private readonly postService: PostService = new PostService()) {}

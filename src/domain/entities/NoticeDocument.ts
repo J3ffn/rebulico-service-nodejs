@@ -1,4 +1,4 @@
-import { UserTraceDocument } from './UserTraceDocument';
+import { UserTraceDocument } from './AuthorDocument';
 import { Document } from "mongoose";
 
 interface NoticeAttributes {

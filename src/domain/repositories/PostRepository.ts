@@ -1,4 +1,4 @@
-import { PostDocument } from "./../entities/PostDocument";
+import PostDocument from "./../entities/PostDocument";
 import { GenericRepository } from "./GenericRepository";
 import { PostModel } from "../../infra/database/schemas/Post.schema";
 

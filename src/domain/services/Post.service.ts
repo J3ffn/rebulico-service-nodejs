@@ -1,5 +1,5 @@
 import { PostModel } from "../../infra/database/schemas/Post.schema";
-import { PostDocument } from "../entities/PostDocument";
+import PostDocument from "../entities/PostDocument";
 import PostRepository from "../repositories/PostRepository";
 
 export default class PostService {

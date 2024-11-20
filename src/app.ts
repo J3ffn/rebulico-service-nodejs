@@ -1,9 +1,10 @@
 import express from "express";
 
 import dataBaseConnection from "./infra/database/DataBaseConnection";
-import routesMapped from "./presentation/routes";
+import routes from "./presentation/routes";
 import { configsExpress } from "./shared/config/ExpressDefaultConfigs";
-import LogRoutersRegistered from "./shared/utils/LogRoutersRegistered";
+import logger from "./shared/utils/Logger";
+
 
 const app = express();
 
@@ -11,21 +12,12 @@ configsExpress.forEach((config) => {
   app.use(config);
 });
 
-app.use(routesMapped);
-
-if (Boolean(process.env.DEBUG_MODE)) {
-  LogRoutersRegistered(app);
-}
+app.use(routes);
 
 const PORT = process.env.SERVER_PORT;
 
-dataBaseConnection()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log("👻 Server is running on port " + PORT);
-    });
-  })
-  .catch((err) => {
-    console.log("Error on start server");
-    console.error(err);
+dataBaseConnection().then(() => {
+  app.listen(PORT, () => {
+    logger.log("👻 Servidor rodando na porta: " + PORT);
   });
+})

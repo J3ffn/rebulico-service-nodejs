@@ -1,22 +1,33 @@
 import mongoose, { Schema } from "mongoose";
-import { UserDocument } from "../../../domain/entities/UserDocument";
-import { UserTraceSchema } from "./UserTrace.schema";
+import UserDocument from "../../../domain/entities/UserDocument";
 
-const userSchema: Schema = new Schema(
+const userSchema = new Schema(
   {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     email: {
       type: String,
-      require: true,
+      required: true,
+      unique: true,
     },
-    name: {
+    password: {
       type: String,
-      require: true,
+      required: true,
     },
-    created_by: UserTraceSchema,
-    updated_by: UserTraceSchema,
+    roles: {
+      type: [String], // Exemplo: ['author', 'admin', 'editor']
+      default: ['user'],
+    },
+    created_at: {
+      type: Date,
+      default: Date.now,
+    },
   },
   {
-    timestamps: true, // Já cria o updated_at e created_at
+    timestamps: true,
     versionKey: false,
   }
 );

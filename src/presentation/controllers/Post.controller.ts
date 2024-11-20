@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import { FindPostByIdUseCase } from "./../../application/useCases/post/FindPostByIdUseCase";
-import { FindAllPostsUseCase } from "../../application/useCases/post/FindAllPostsUseCase";
-import { CreatePostUsecase } from "../../application/useCases/post/CreatePostUseCase";
+import { FindPostByIdUseCase } from "../../application/useCases/post/FindPostById.useCase";
+import { FindAllPostsUseCase } from "../../application/useCases/post/FindAllPosts.useCase";
+import { CreatePostUsecase } from "../../application/useCases/post/CreatePost.useCase";
 import { HttpStatus } from "../../shared/utils/HttpStatus";
+import buildError from "../../shared/utils/BuildError";
 
 export default class PostController {
   private readonly createPostUseCase: CreatePostUsecase;
@@ -16,13 +17,14 @@ export default class PostController {
   }
 
   public async create(req: Request, res: Response): Promise<void> {
-    const { post, responsible } = req.body;
+    const body = req.body;
     try {
-      await this.createPostUseCase.execute(post, responsible);
+      await this.createPostUseCase.execute(body);
       res.status(HttpStatus.CREATED).send();
-    } catch (err) {
-      console.error(err);
-      res.status(HttpStatus.BAD_REQUEST).send();
+    } catch (err: any) {
+      const errorBuilded = buildError(err, HttpStatus.BAD_REQUEST)
+      // console.error(err);
+      res.status(HttpStatus.BAD_REQUEST).json(errorBuilded);
     }
   }
 

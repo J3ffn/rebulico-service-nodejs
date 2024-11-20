@@ -1,4 +1,4 @@
-import PostController from "./../controllers/PostController";
+import PostController from "../../controllers/Post.controller";
 import { Router } from "express";
 
 const postController = new PostController();

@@ -1,26 +1,92 @@
 import mongoose, { Schema } from "mongoose";
-import { UserTraceSchema } from "./UserTrace.schema";
-import { PostDocument } from "../../../domain/entities/PostDocument";
+import PostDocument  from "../../../domain/entities/PostDocument";
+import { PostStatus } from "../../../domain/constants/PostConstants";
 
-const postSchema: Schema = new Schema(
+const postSchema = new Schema(
   {
     title: {
       type: String,
-      require: true,
+      required: true,
     },
     content: {
       type: String,
-      require: true,
+      required: true,
     },
-    author_id: {
+    author: {
+      id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Author',
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      profile_image: {
+        type: String,
+        required: true,
+      },
+    },
+    collaborators: [
+      {
+        id: {
+          type: Schema.Types.ObjectId,
+          ref: 'Author', // Reutilizando o schema de autor
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    read_time: {
+      type: Number,
+      required: true,
+    },
+    media: [
+      {
+        _id: false,
+        type: {
+          type: String,
+          required: true,
+        },
+        url: {
+          type: String,
+          required: true,
+        },
+        caption: {
+          type: String,
+        },
+      },
+    ],
+    status: {
       type: String,
-      require: true,
+      enum: [...Object.values(PostStatus)],
+      required: true,
     },
-    created_by: UserTraceSchema,
-    updated_by: UserTraceSchema,
+    published_at: {
+      type: Date,
+      required: true,
+    },
+    tag: {
+      _id: {
+        type: Schema.Types.ObjectId,
+        ref: 'Tag', // Referência à coleção de Tags
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      slug: {
+        type: String,
+        required: true,
+      },
+    },
   },
   {
-    timestamps: true, // Já cria o updated_at e created_at
+    timestamps: true, // Cria automaticamente createdAt e updatedAt
     versionKey: false,
   }
 );
