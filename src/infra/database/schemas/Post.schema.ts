@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import PostDocument  from "../../../domain/entities/PostDocument";
-import { PostStatus } from "../../../domain/constants/PostConstants";
+import { PostStatus } from "../../../shared/constants/PostConstants";
 
 const postSchema = new Schema(
   {

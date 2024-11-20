@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { FindPostByIdUseCase } from "../../application/useCases/post/FindPostById.useCase";
 import { FindAllPostsUseCase } from "../../application/useCases/post/FindAllPosts.useCase";
 import { CreatePostUsecase } from "../../application/useCases/post/CreatePost.useCase";
-import { HttpStatus } from "../../shared/utils/HttpStatus";
+import { HttpStatus } from "../../shared/constants/HttpStatus";
 import buildError from "../../shared/utils/BuildError";
 
 export default class PostController {

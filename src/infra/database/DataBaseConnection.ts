@@ -1,6 +1,6 @@
 import "dotenv";
 import mongoose from "mongoose";
-import logger from "../../shared/utils/Logger";
+import logger from "../../shared/services/Logger";
 
 export default async function dataBaseConnection() {
   try {

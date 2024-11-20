@@ -3,7 +3,7 @@ import express from "express";
 import dataBaseConnection from "./infra/database/DataBaseConnection";
 import routes from "./presentation/routes";
 import { configsExpress } from "./shared/config/ExpressDefaultConfigs";
-import logger from "./shared/utils/Logger";
+import logger from "./shared/services/Logger";
 
 
 const app = express();
