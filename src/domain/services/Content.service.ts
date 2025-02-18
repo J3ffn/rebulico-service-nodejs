@@ -1,6 +1,5 @@
-import { LadingPageContent } from "../entities/LadingPageContent.model";
-import PostDocument from "../entities/PostDocument";
-import PostRepository from "../repositories/PostRepository";
+import PostDocument from "../entities/Post.document";
+import PostRepository from "../repositories/Post.repository";
 
 export default class PostService {
   private readonly postRepository: PostRepository;

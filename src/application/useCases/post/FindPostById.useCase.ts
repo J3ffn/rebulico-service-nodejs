@@ -1,4 +1,4 @@
-import PostDocument from "../../../domain/entities/PostDocument";
+import PostDocument from "../../../domain/entities/Post.document";
 import PostService from "../../../domain/services/Post.service";
 
 export class FindPostByIdUseCase {

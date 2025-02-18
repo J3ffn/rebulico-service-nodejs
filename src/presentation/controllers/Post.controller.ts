@@ -4,6 +4,7 @@ import { FindAllPostsUseCase } from "../../application/useCases/post/FindAllPost
 import { CreatePostUsecase } from "../../application/useCases/post/CreatePost.useCase";
 import { HttpStatus } from "../../shared/constants/HttpStatus";
 import buildError from "../../shared/utils/BuildError";
+import logger from "../../shared/services/Logger";
 
 export default class PostController {
   private readonly createPostUseCase: CreatePostUsecase;
@@ -23,7 +24,7 @@ export default class PostController {
       res.status(HttpStatus.CREATED).send();
     } catch (err: any) {
       const errorBuilded = buildError(err, HttpStatus.BAD_REQUEST)
-      // console.error(err);
+      logger.error(err);
       res.status(HttpStatus.BAD_REQUEST).json(errorBuilded);
     }
   }
@@ -32,9 +33,10 @@ export default class PostController {
     try {
       const posts = await this.findAllPostsUseCase.execute();
       res.status(HttpStatus.OK).json(posts);
-    } catch (err) {
-      console.error(err);
-      res.status(HttpStatus.BAD_REQUEST).json(err);
+    } catch (err: any) {
+      const errorBuilded = buildError(err, HttpStatus.BAD_REQUEST)
+      logger.error(err);
+      res.status(HttpStatus.BAD_REQUEST).json(errorBuilded);
     }
   }
 

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { NoticeDocument } from "../../../domain/entities/NoticeDocument";
+import { NoticeDocument } from "../../../domain/entities/Notice.document";
 
 const tagSchema = new Schema(
   {

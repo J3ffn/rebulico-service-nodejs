@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import AuthorDocument from "../../../domain/entities/AuthorDocument";
+import AuthorDocument from "../../../domain/entities/Author.document";
 
 // SubDocumento
 const authorSchema = new Schema(

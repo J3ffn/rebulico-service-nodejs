@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "set NODE_ENV=dev && nodemon -r dotenv/config -w src --exec ts-node src/app.ts",
+    "dev": "set NODE_ENV=local && nodemon -r dotenv/config -w src --exec ts-node src/app.ts",
     "production": "set NODE_ENV=prod && nodemon -r dotenv/config -w src --exec ts-node src/app.ts"
   },
   "keywords": [],
@@ -23,9 +23,9 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.4",
+    "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.6.2",
-    "ts-node": "^10.9.2"
+    "typescript": "^5.6.2"
   },
   "nodemonConfig": {
     "ignore": [

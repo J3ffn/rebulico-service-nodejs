@@ -5,7 +5,6 @@ import routes from "./presentation/routes";
 import { configsExpress } from "./shared/config/ExpressDefaultConfigs";
 import logger from "./shared/services/Logger";
 
-
 const app = express();
 
 configsExpress.forEach((config) => {
