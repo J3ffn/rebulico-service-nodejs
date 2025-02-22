@@ -1,14 +1,14 @@
-import PostDocument from "../entities/Post.document";
-import { GenericRepository } from "./Generic.repository";
-import { PostModel } from "../../infra/database/schemas/Post.schema";
+import PostDocument from "../../domain/entities/Post.document";
+import { GenericRepository } from "../../domain/repositories/Generic.repository";
+import { PostModel } from "../database/schemas/Post.schema";
 
 export default class PostRepository implements GenericRepository<PostDocument> {
-  async save(data: PostDocument): Promise<void> {
+  async save(data: PostDocument): Promise<PostDocument> {
     const newPost = new PostModel({
       ...data,
     });
 
-    await newPost.save();
+    return await newPost.save();
   }
 
   async findAll(): Promise<PostDocument[] | null> {

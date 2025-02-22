@@ -8,6 +8,7 @@ interface Tag {
   _id: string;
   name: string;
   slug: string;
+  description: string;
 }
 
 interface Author {
@@ -25,9 +26,7 @@ export default interface CreatePostDTO {
   title: string;
   author: Author;
   collaborators?: Collaborator[];
-  read_time: number;
   media: Media[];
-  status: string;
   content: string;
   published_at: string;
   tag: Tag;

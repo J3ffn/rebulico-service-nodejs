@@ -1,5 +1,5 @@
 import PostDocument from "../entities/Post.document";
-import PostRepository from "../repositories/Post.repository";
+import PostRepository from "../../infra/repositories/Post.repository";
 
 export default class PostService {
   private readonly postRepository: PostRepository;

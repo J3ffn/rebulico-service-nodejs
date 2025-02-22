@@ -40,26 +40,10 @@ const postSchema = new Schema(
         },
       },
     ],
-    read_time: {
-      type: Number,
-      required: true,
-    },
-    media: [
-      {
-        _id: false,
-        type: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
-        caption: {
-          type: String,
-        },
-      },
-    ],
+    bannerImage: {
+      type: String,
+      require: true
+    }, 
     status: {
       type: String,
       enum: [...Object.values(PostStatus)],

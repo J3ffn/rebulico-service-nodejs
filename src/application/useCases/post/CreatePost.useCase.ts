@@ -1,6 +1,6 @@
 import PostDocument from "../../../domain/entities/Post.document";
 import PostService from "../../../domain/services/Post.service";
-import CreatePostDTO from "../../dto/CreatePostDTO";
+import CreatePostDTO from "../../dto/post/CreatePostDTO";
 
 export class CreatePostUsecase {
   private readonly postService: PostService;
@@ -9,11 +9,9 @@ export class CreatePostUsecase {
     this.postService = new PostService();
   }
 
-  public async execute(
-    data: CreatePostDTO
-  ): Promise<void> {
+  public async execute(data: CreatePostDTO): Promise<PostDocument> {
     const newPost: PostDocument = { ...data };
 
-    await this.postService.savePost(newPost);
+    return await this.postService.savePost(newPost);
   }
 }

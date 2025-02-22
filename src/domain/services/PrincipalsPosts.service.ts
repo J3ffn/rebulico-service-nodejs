@@ -1,6 +1,6 @@
 
 import PrincipalsPostsDocument from "../entities/PrincipalsPosts.document";
-import PrincipalsPostRepository from "../repositories/PrincipalsPost.repository";
+import PrincipalsPostRepository from "../../infra/repositories/PrincipalsPost.repository";
 
 export default class PrincipalsPostService {
   private readonly principalsPostRepository: PrincipalsPostRepository;
@@ -13,7 +13,7 @@ export default class PrincipalsPostService {
     await this.principalsPostRepository.save(post);
   }
 
-  public async findPrincipalsPosts(): Promise<PrincipalsPostsDocument | null> {
+  public async findPrincipalsPosts(): Promise<PrincipalsPostsDocument[] | null> {
     return await this.principalsPostRepository.findAll();
   }
 }

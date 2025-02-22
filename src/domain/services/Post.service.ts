@@ -1,5 +1,6 @@
+import { PostStatus } from "../../shared/constants/PostConstants";
 import PostDocument from "../entities/Post.document";
-import PostRepository from "../repositories/Post.repository";
+import PostRepository from "../../infra/repositories/Post.repository";
 
 export default class PostService {
   private readonly postRepository: PostRepository;
@@ -8,8 +9,9 @@ export default class PostService {
     this.postRepository = new PostRepository();
   }
 
-  public async savePost(post: PostDocument): Promise<void> {
-    await this.postRepository.save(post);
+  public async savePost(post: PostDocument): Promise<PostDocument> {
+    post.status = PostStatus.PUBLISHED
+    return await this.postRepository.save(post);
   }
 
   public async findAllPosts(): Promise<PostDocument[] | null> {

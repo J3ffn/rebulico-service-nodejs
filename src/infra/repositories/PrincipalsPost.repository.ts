@@ -1,6 +1,6 @@
-import { GenericRepository } from "./Generic.repository";
-import PrincipalsPostsDocument from "../entities/PrincipalsPosts.document";
-import { PrincipalsPostsModel } from "../../infra/database/schemas/PrincipalsPosts.schema";
+import { GenericRepository } from "../../domain/repositories/Generic.repository";
+import PrincipalsPostsDocument from "../../domain/entities/PrincipalsPosts.document";
+import { PrincipalsPostsModel } from "../database/schemas/PrincipalsPosts.schema";
 
 export default class PrincipalsPostRepository
   implements GenericRepository<PrincipalsPostsDocument>
@@ -13,8 +13,8 @@ export default class PrincipalsPostRepository
     await newPrincipalsPostDocuments.save();
   }
 
-  async findAll(): Promise<PrincipalsPostsDocument | null> {
-    const principalsPostDocuments = await PrincipalsPostsModel.findOne();
+  async findAll(): Promise<PrincipalsPostsDocument[] | null> {
+    const principalsPostDocuments = await PrincipalsPostsModel.find();
     
     return principalsPostDocuments;
   }

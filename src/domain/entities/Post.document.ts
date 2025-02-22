@@ -1,3 +1,6 @@
+import { PostStatus } from "../../shared/constants/PostConstants";
+import { TagDocument } from "./Tag.document";
+
 export class Media {
   type: string;
   url: string;
@@ -7,18 +10,6 @@ export class Media {
     this.type = type;
     this.url = url;
     if (caption) this.caption = caption;
-  }
-}
-
-export class Tag {
-  _id: string;
-  name: string;
-  slug: string;
-
-  constructor(_id: string, name: string, slug: string) {
-    this._id = _id;
-    this.name = name;
-    this.slug = slug;
   }
 }
 
@@ -48,12 +39,11 @@ export default class PostDocument {
   constructor(
     public title: string,
     public author: Author,
-    public read_time: number,
     public media: Media[],
-    public status: string,
     public content: string,
     public published_at: string,
-    public tag: Tag,
+    public tag: TagDocument,
+    public status?: PostStatus,
     public collaborators?: Collaborator[]
   ) {}
 }

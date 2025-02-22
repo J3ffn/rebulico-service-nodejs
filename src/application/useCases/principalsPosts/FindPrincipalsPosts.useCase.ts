@@ -6,7 +6,7 @@ export class FindPrincipalsPostsUseCase {
     private readonly principalsPostService = new PrincipalsPostService()
   ) {}
 
-  public async execute(): Promise<PrincipalsPostsDocument | null> {
+  public async execute(): Promise<PrincipalsPostsDocument[] | null> {
     return await this.principalsPostService.findPrincipalsPosts();
   }
 }

@@ -20,8 +20,8 @@ export default class PostController {
   public async create(req: Request, res: Response): Promise<void> {
     const body = req.body;
     try {
-      await this.createPostUseCase.execute(body);
-      res.status(HttpStatus.CREATED).send();
+      const dataCreated = await this.createPostUseCase.execute(body);
+      res.status(HttpStatus.CREATED).json(dataCreated);
     } catch (err: any) {
       const errorBuilded = buildError(err, HttpStatus.BAD_REQUEST)
       logger.error(err);
