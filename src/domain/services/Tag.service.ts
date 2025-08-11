@@ -9,7 +9,7 @@ export default class TagService {
     this.tagRepository = new TagRepository();
   }
 
-  public async saveTag(data: TagDocument): Promise<TagDocument | void> {
+  public async saveTag(data: TagDocument): Promise<TagDocument | null> {
     return await this.tagRepository.save(data)
   }
 

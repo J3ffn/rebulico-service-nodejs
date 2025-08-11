@@ -5,12 +5,12 @@ import { PrincipalsPostsModel } from "../database/schemas/PrincipalsPosts.schema
 export default class PrincipalsPostRepository
   implements GenericRepository<PrincipalsPostsDocument>
 {
-  async save(data: PrincipalsPostsDocument): Promise<void> {
+  async save(data: PrincipalsPostsDocument): Promise<PrincipalsPostsDocument> {
     const newPrincipalsPostDocuments = new PrincipalsPostsModel({
       ...data,
     });
 
-    await newPrincipalsPostDocuments.save();
+    return await newPrincipalsPostDocuments.save();
   }
 
   async findAll(): Promise<PrincipalsPostsDocument[] | null> {

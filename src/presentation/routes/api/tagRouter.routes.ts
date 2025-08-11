@@ -8,5 +8,6 @@ const tagRouter = Router();
 
 tagRouter.post("/", tagController.create.bind(tagController));
 tagRouter.get("/", tagController.findAllTags.bind(tagController));
+tagRouter.get("/:id", tagController.findTagById.bind(tagController));
 
 export default tagRouter;

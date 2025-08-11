@@ -7,7 +7,7 @@ export class CreateTagsUseCase {
     private readonly tagService = new TagService()
   ) {}
 
-  public async execute(data: CreateTagDTO): Promise<TagDocument | void> {
+  public async execute(data: CreateTagDTO): Promise<TagDocument | null> {
     const tagConverted: TagDocument = data
     return await this.tagService.saveTag(tagConverted);
   }
