@@ -19,6 +19,12 @@ export default class PrincipalsPostRepository
     return principalsPostDocuments;
   }
 
+  async findOne(): Promise<PrincipalsPostsDocument | null> {
+    const principalsPostDocuments = await PrincipalsPostsModel.findOne();
+    
+    return principalsPostDocuments;
+  }
+
   async findById(id: string): Promise<PrincipalsPostsDocument | null> {
     const principalsPostDocuments = await PrincipalsPostsModel.findById(
       id

@@ -13,7 +13,7 @@ export default class PrincipalsPostService {
     await this.principalsPostRepository.save(post);
   }
 
-  public async findPrincipalsPosts(): Promise<PrincipalsPostsDocument[] | null> {
-    return await this.principalsPostRepository.findAll();
+  public async findPrincipalsPosts(): Promise<PrincipalsPostsDocument | null> {
+    return await this.principalsPostRepository.findOne();
   }
 }
