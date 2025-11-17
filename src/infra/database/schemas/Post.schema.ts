@@ -12,6 +12,10 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    categorie: {
+      type: String,
+      required: false,
+    },
     author: {
       id: {
         type: Schema.Types.ObjectId,
@@ -24,7 +28,7 @@ const postSchema = new Schema(
       },
       profile_image: {
         type: String,
-        required: true,
+        required: false,
       },
     },
     collaborators: [
@@ -43,7 +47,7 @@ const postSchema = new Schema(
     bannerImage: {
       type: String,
       require: true
-    }, 
+    },
     status: {
       type: String,
       enum: [...Object.values(PostStatus)],

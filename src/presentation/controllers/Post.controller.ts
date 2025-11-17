@@ -17,13 +17,32 @@ export default class PostController {
     this.findPostByIdUseCase = new FindPostByIdUseCase();
   }
 
+  private formatFiles = (files?: Express.Multer.File[]) => {
+    if (!files || files.length === 0) return [];
+
+    return files.map((file) => {
+      return {
+        buffer: file.buffer,
+        originalname: file.originalname,
+        mimeType: file.mimetype,
+      };
+    });
+  };
+
   public async create(req: Request, res: Response): Promise<void> {
-    const body = req.body;
+    const body = JSON.parse(req.body.data);
+    const { images, banner } = req.files as {
+      images?: Express.Multer.File[];
+      banner?: Express.Multer.File[];
+    };
+    const fileList = this.formatFiles(images);
+    const bannerList = this.formatFiles(banner);
+
     try {
-      const dataCreated = await this.createPostUseCase.execute(body);
+      const dataCreated = await this.createPostUseCase.execute({ ...body, media: fileList, bannerImage: bannerList });
       res.status(HttpStatus.CREATED).json(dataCreated);
     } catch (err: any) {
-      const errorBuilded = buildError(err, HttpStatus.BAD_REQUEST)
+      const errorBuilded = buildError(err, HttpStatus.BAD_REQUEST);
       logger.error(err);
       res.status(HttpStatus.BAD_REQUEST).json(errorBuilded);
     }
@@ -34,7 +53,7 @@ export default class PostController {
       const posts = await this.findAllPostsUseCase.execute();
       res.status(HttpStatus.OK).json(posts);
     } catch (err: any) {
-      const errorBuilded = buildError(err, HttpStatus.BAD_REQUEST)
+      const errorBuilded = buildError(err, HttpStatus.BAD_REQUEST);
       logger.error(err);
       res.status(HttpStatus.BAD_REQUEST).json(errorBuilded);
     }
