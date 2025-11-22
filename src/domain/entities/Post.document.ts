@@ -2,13 +2,15 @@ import { PostStatus } from "../../shared/constants/PostConstants";
 import { TagDocument } from "./Tag.document";
 
 export class Media {
-  type: string;
   url: string;
+  originalname: string;
+  mimeType: string;
   caption?: string;
 
-  constructor(type: string, url: string, caption?: string) {
-    this.type = type;
+  constructor(url: string, originalname: string, mimeType: string, caption?: string) {
     this.url = url;
+    this.originalname = originalname;
+    this.mimeType = mimeType;
     if (caption) this.caption = caption;
   }
 }
@@ -39,11 +41,12 @@ export default class PostDocument {
   constructor(
     public title: string,
     public author: Author,
-    public media: Media[],
+    public bannerImage: string,
     public content: string,
     public published_at: string,
     public tag: TagDocument,
     public status?: PostStatus,
-    public collaborators?: Collaborator[]
+    public collaborators?: Collaborator[],
+    public categorie?: string
   ) {}
 }

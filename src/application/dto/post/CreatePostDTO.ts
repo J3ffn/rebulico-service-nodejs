@@ -1,7 +1,7 @@
 interface Media {
-  type: string;
-  url: string;
-  caption: string
+  buffer: Buffer;
+  originalname: string;
+  mimeType: string;
 }
 
 interface Tag {
@@ -26,7 +26,8 @@ export default interface CreatePostDTO {
   title: string;
   author: Author;
   collaborators?: Collaborator[];
-  media: Media[];
+  bannerImage: Media[];
+  media?: Media[];
   content: string;
   published_at: string;
   tag: Tag;
