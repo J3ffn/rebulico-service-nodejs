@@ -47,6 +47,7 @@ export default class PostDocument {
     public tag: TagDocument,
     public status?: PostStatus,
     public collaborators?: Collaborator[],
-    public categorie?: string
+    public categorie?: string,
+    public _id?: string,
   ) {}
 }

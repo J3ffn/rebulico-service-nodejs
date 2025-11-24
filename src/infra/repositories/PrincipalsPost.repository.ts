@@ -13,6 +13,22 @@ export default class PrincipalsPostRepository
     return await newPrincipalsPostDocuments.save();
   }
 
+  async addPostToLatestPosts(post: any): Promise<any> {
+    const principalsPost = await PrincipalsPostsModel.findOne();
+
+    if(!principalsPost) {
+      return;
+    }
+
+    if (principalsPost.latest_posts.length > 0) {
+      principalsPost.latest_posts.pop();
+    }
+
+    principalsPost.latest_posts.unshift(post);
+
+    return await principalsPost.save();
+  }
+
   async findAll(): Promise<PrincipalsPostsDocument[] | null> {
     const principalsPostDocuments = await PrincipalsPostsModel.find();
     
