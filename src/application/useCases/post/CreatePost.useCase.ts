@@ -54,7 +54,7 @@ export class CreatePostUsecase {
       data.content = data.content.replace(originalName, newUrl);
     });
 
-    const newPost: PostDocument = { ...data, bannerImage, categorie: "ufpb-pelo-avesso" };
+    const newPost: PostDocument = { ...data, bannerImage };
 
     const savedPost = await this.postService.savePost(newPost);
 
@@ -63,7 +63,6 @@ export class CreatePostUsecase {
       title: savedPost.title,
       initialText: savedPost.title,
       author: savedPost.author,
-      read_time: 5, // valor padrão
       media: { type: "image", url: savedPost.bannerImage, alt: savedPost.title },
       published_at: savedPost.published_at || new Date(),
       tag: { text: savedPost.tag.name, color: "#FF8000" }, // valor padrão

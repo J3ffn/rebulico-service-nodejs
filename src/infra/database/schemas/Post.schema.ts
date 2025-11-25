@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import PostDocument  from "../../../domain/entities/Post.document";
 import { PostStatus } from "../../../shared/constants/PostConstants";
+import { CategorySchema } from "./Category.schema";
 
 const postSchema = new Schema(
   {
@@ -12,10 +13,7 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    categorie: {
-      type: String,
-      required: false,
-    },
+    categorie: CategorySchema,
     author: {
       id: {
         type: Schema.Types.ObjectId,

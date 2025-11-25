@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import PrincipalsPostsDocument from "../../../domain/entities/PrincipalsPosts.document";
+import { CategorySchema } from "./Category.schema";
 
 interface Author {
   id: string;
@@ -18,6 +19,14 @@ interface Tag {
   color: string;
 }
 
+interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+  color: string;
+  description: string;
+}
+
 interface News {
   id: string;
   title: string;
@@ -27,7 +36,7 @@ interface News {
   media: Media;
   published_at: Date;
   tag: Tag;
-  categorie?: string;
+  categorie?: Category;
   summary?: string;
 }
 
@@ -58,11 +67,10 @@ const PrincipalsPostsSchema = new Schema<News>({
   title: { type: String, required: true },
   initialText: { type: String },
   author: { type: AuthorSchema },
-  read_time: { type: Number, required: true },
   media: { type: MediaSchema, required: true },
   published_at: { type: Date, required: true },
   tag: { type: TagSchema, required: true },
-  categorie: { type: String },
+  categorie: { type: CategorySchema, required: false },
   summary: { type: String },
 });
 
@@ -79,9 +87,6 @@ const PrincipalsPostsModelSchema = new Schema<PrincipalsPostsDocument>({
   stories: { type: [StorySchema], required: true },
 });
 
-const PrincipalsPostsModel = mongoose.model<PrincipalsPostsDocument>(
-  "principals-posts",
-  PrincipalsPostsModelSchema
-);
+const PrincipalsPostsModel = mongoose.model<PrincipalsPostsDocument>("principals-posts", PrincipalsPostsModelSchema);
 
 export { PrincipalsPostsModel, PrincipalsPostsModelSchema as PrincipalsPostsSchema };
