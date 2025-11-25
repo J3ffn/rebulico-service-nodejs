@@ -31,11 +31,6 @@ const postSchema = new Schema(
     },
     collaborators: [
       {
-        id: {
-          type: Schema.Types.ObjectId,
-          ref: 'Author', // Reutilizando o schema de autor
-          required: true,
-        },
         name: {
           type: String,
           required: true,

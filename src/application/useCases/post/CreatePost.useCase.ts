@@ -54,6 +54,23 @@ export class CreatePostUsecase {
       data.content = data.content.replace(originalName, newUrl);
     });
 
+    if (typeof data.content === "string") {
+      const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+      for (const [originalName, newUrl] of urlMap.entries()) {
+        if (!originalName) continue;
+
+        // replace plain occurrences (global)
+        data.content = data.content.replace(new RegExp(escapeRegExp(originalName), "g"), newUrl);
+
+        // replace URL-encoded occurrences (e.g. spaces -> %20)
+        const encoded = encodeURIComponent(originalName);
+        if (encoded !== originalName) {
+          data.content = data.content.replace(new RegExp(escapeRegExp(encoded), "g"), newUrl);
+        }
+      }
+    }
+
     const newPost: PostDocument = { ...data, bannerImage };
 
     const savedPost = await this.postService.savePost(newPost);
