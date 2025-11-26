@@ -1,4 +1,5 @@
 import { PostStatus } from "../../shared/constants/PostConstants";
+import { CategoryDocument } from "./Category.document";
 import { TagDocument } from "./Tag.document";
 
 export class Media {
@@ -28,25 +29,24 @@ export class Author {
 }
 
 export class Collaborator {
-  id: string;
   name: string;
 
-  constructor(id: string, name: string) {
-    this.id = id;
+  constructor(name: string) {
     this.name = name;
   }
 }
 
-export default class PostDocument {
-  constructor(
-    public title: string,
-    public author: Author,
-    public bannerImage: string,
-    public content: string,
-    public published_at: string,
-    public tag: TagDocument,
-    public status?: PostStatus,
-    public collaborators?: Collaborator[],
-    public categorie?: string
-  ) {}
+interface PostDocument {
+  title: string;
+  author: Author;
+  bannerImage: string;
+  content: string;
+  published_at: string;
+  tag: TagDocument;
+  status?: PostStatus;
+  collaborators?: Collaborator[];
+  categorie?: CategoryDocument;
+  _id?: string;
 }
+
+export default PostDocument;

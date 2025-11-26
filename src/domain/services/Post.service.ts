@@ -21,4 +21,12 @@ export default class PostService {
   public async findPostById(id: string): Promise<PostDocument | null> {
     return await this.postRepository.findById(id);
   }
+
+  public async findPostByCategorySlug(slug: string): Promise<PostDocument[] | null> {
+    return await this.postRepository.findByCategorySlug(slug);
+  }
+
+  public async findPostByCategoryId(categoryId: string): Promise<PostDocument[] | null> {
+    return await this.postRepository.findByCategoryId(categoryId);
+  }
 }

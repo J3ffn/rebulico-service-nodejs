@@ -5,16 +5,19 @@ import { CreatePostUsecase } from "../../application/useCases/post/CreatePost.us
 import { HttpStatus } from "../../shared/constants/HttpStatus";
 import buildError from "../../shared/utils/BuildError";
 import logger from "../../shared/services/Logger";
+import { FindPostByCategorySlugUseCase } from "../../application/useCases/post/FindPostsByCategorySlug.useCase";
 
 export default class PostController {
   private readonly createPostUseCase: CreatePostUsecase;
   private readonly findAllPostsUseCase: FindAllPostsUseCase;
   private readonly findPostByIdUseCase: FindPostByIdUseCase;
+  private readonly findPostByCategorySlugUseCase: FindPostByCategorySlugUseCase;
 
   constructor() {
     this.createPostUseCase = new CreatePostUsecase();
     this.findAllPostsUseCase = new FindAllPostsUseCase();
     this.findPostByIdUseCase = new FindPostByIdUseCase();
+    this.findPostByCategorySlugUseCase = new FindPostByCategorySlugUseCase();
   }
 
   private formatFiles = (files?: Express.Multer.File[]) => {
@@ -63,6 +66,16 @@ export default class PostController {
     const { id } = req.params;
     try {
       const posts = await this.findPostByIdUseCase.execute(id);
+      res.status(HttpStatus.OK).json(posts);
+    } catch (err) {
+      res.status(HttpStatus.BAD_REQUEST).send();
+    }
+  }
+
+  public async findPostByCategory(req: Request, res: Response): Promise<void> {
+    const { slug } = req.params;
+    try {
+      const posts = await this.findPostByCategorySlugUseCase.execute(slug);
       res.status(HttpStatus.OK).json(posts);
     } catch (err) {
       res.status(HttpStatus.BAD_REQUEST).send();

@@ -14,6 +14,7 @@ const upload = multer({
 
 postRouter.get("/", postController.findAllPosts.bind(postController));
 postRouter.get("/:id", postController.findPostById.bind(postController));
+postRouter.get("/category/:slug", postController.findPostByCategory.bind(postController));
 postRouter.post(
   "/",
   AuthMiddleware,
