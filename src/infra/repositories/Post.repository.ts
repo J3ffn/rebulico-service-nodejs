@@ -25,13 +25,14 @@ export default class PostRepository implements GenericRepository<PostDocument> {
   }
 
   async findByCategoryId(categoryId: string): Promise<PostDocument[] | null> {
-    return await PostModel.find({ categorie: categoryId }).populate("categorie").exec();
+    return await PostModel.find({ "categorie._id": categoryId }).populate("categorie").exec();
   }
 
   // ou buscar por slug
   async findByCategorySlug(slug: string): Promise<PostDocument[] | null> {
     const category = await CategoryModel.findOne({ slug }).exec();
     if (!category) return null;
-    return await PostModel.find({ categorie: category._id }).populate("categorie").exec();
+
+    return await PostModel.find({ "categorie._id": category._id }).exec();
   }
 }
